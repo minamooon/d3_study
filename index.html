@@ -4,35 +4,46 @@
 <head>
     <meta charset="utf-8">
     <title>D3</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
 </head>
 
 <body>
-    <p>
-        Hello1
-    </p>
-    <p>
-        Hello2
-    </p>
-    <p>
-        Hello3
-    </p>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
     <script>
-      var dataset = [12, 24];
-      var p = d3.select("body").selectAll("p");
-      // dataを使った瞬間に仮装領域が作られる
-      //
-      // update: 対応する要素がある場合 -> text, style
-      // enter: 対応する要素が足りない場合　-> append
-      // exit: 対応する要素が余った場合　-> remove
+        var dataset = [11, 25, 45, 30, 33];
+        var w = 500;
+        var h = 200;
 
-      var update = p.data(dataset);
-      var exit = update.exit();
-      update.text(function(d) {
-        return "update:" + d;
-      });
-      exit.style("color", "red"). remove();
+        var svg = d3.select("body").append("svg").attr({
+            width: w,
+            height: h
+        }); //({})この書き方がd3ver4だとできないので　v３にダウングレード
 
+        svg.selectAll("circle")
+                    .data(dataset)
+                    .enter()
+                    .append("circle")
+                    .attr({
+                        cx: function(d, i) { return 50 + ( i * 100); },
+                        cy: h / 2,
+                        r: function(d) { return d; },
+                        fill: "red"
+                    });
+
+        // svg.selectAll("circle")
+        //     .data(dataset)
+        //     .enter()
+        //     .append("circle")
+        //     .attr({
+        //         cx: function(d, i) {
+        //             return 50 + (i * 100);
+        //         },
+        //         cy: h / 2,
+        //         r: function(d) {
+        //             return d;
+        //         },
+        //         fill: "red"
+        //     });
     </script>
 </body>
 
