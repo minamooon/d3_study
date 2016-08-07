@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>D3</title>
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css"> -->
 </head>
 
 <body>
@@ -19,28 +19,18 @@
             height: h
         }); //({})この書き方がd3ver4だとできないので　v３にダウングレード
 
-        svg.selectAll("circle")
-            .data(dataset)
-            .enter()
-            .append("circle")
-            .on("mouseover", function(d) {
-              d3.select(this).attr("fill", "orange");
-            })
-            .on("mouseout", function(d) {
-              d3.select(this).attr("fill", "red");
-            })
-            .on("click", function(d) {
-              var rs = d3.select(this).attr("r");
-              alert(rs);
-            })
-            .attr({
-                cx: function(d, i) {
-                    return 50 + (i * 100);
-                },
-                cy: h / 2,
-                r: function(d) {return d;},
-                fill: "red"
-                });
+        svg.selectAll("rect")
+          .data(dataset)
+          .enter()
+          .append("rect")
+          .attr({
+            x: 0,
+            y: function(d, i){ return i * 25;},
+            width: function(d) { return d; },
+            height: 20,
+            fill: "red"
+          });
+
     </script>
 </body>
 
