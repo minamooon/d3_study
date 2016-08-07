@@ -14,6 +14,11 @@
         var w = 500;
         var h = 200;
 
+        var xScale = d3.scale.linear()
+                        .domain([0, d3.max(dataset)])
+                        .range([0, w])
+                        .nice();
+
         var svg = d3.select("body").append("svg").attr({
             width: w,
             height: h
@@ -26,11 +31,10 @@
           .attr({
             x: 0,
             y: function(d, i){ return i * 25;},
-            width: function(d) { return d; },
+            width: function(d) { return xScale(d); },
             height: 20,
             fill: "red"
           });
-
     </script>
 </body>
 
